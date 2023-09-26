@@ -221,6 +221,8 @@ The primary challenge of this project is to implement a robust and accurate indo
 
 # Resources
 
+- [Real Time Location Ultra Wideband](https://iosoft.blog/2019/11/22/real-time-location-ultra-wideband/)
+- [UWV with Rasperry Pi](https://medium.com/@newforestberlin/precise-realtime-indoor-localization-with-raspberry-pi-and-ultra-wideband-technology-decawave-191e4e2daa8c)
 - [Ultra-Wideband](https://en.wikipedia.org/wiki/Ultra-wideband)
 - [Ultra Wideband Indoor Positioning Technologies: Analysis and Recent Advances](https://www.mdpi.com/1424-8220/16/5/707)
 - [Time Difference of Arrival](https://www.inpixon.com/technology/standards/time-difference-of-arrival)
@@ -228,3 +230,7 @@ The primary challenge of this project is to implement a robust and accurate indo
 - [ESP32 DW1000 UWB Indoor Location Positioning System](https://how2electronics.com/esp32-dw1000-uwb-indoor-location-positioning-system/)
 - [Artificial Intelligence with Python Computer Vision](https://www.tutorialspoint.com/artificial_intelligence_with_python/artificial_intelligence_with_python_computer_vision.htm)
 - [Tello Programming](https://tello.oneoffcoder.com/index.html)
+
+# Product Links
+
+- https://www.e-komponent.com/dwm1001-board-no-batteries
