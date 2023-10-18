@@ -5,28 +5,38 @@
 
 # Table of Contents
 
-- [Topics](#topics)
-
+- [Table of Contents](#table-of-contents)
+- [Mentioned Subjects](#mentioned-subjects)
 - [Introduction](#introduction)
-
+- [Components and Key Features](#components-and-key-features)
+    - [-  How to implement Machine Learning Algorithms?](#---how-to-implement-machine-learning-algorithms)
+    - [How to implement Task Allocation](#how-to-implement-task-allocation)
 - [System Design](#system-design)
-
-    - [Hardware](#hardware-block-diagram)
-
-    - [Firmware](#firmware)
-
-    - [Software](#software)
-    
-
-    - [Core Module](#core-module-image-processing-and-control)
-
-    - [Communication](#communication)
-
-
+  - [Hardware Block Diagram](#hardware-block-diagram)
+    - [Hardware Components](#hardware-components)
+  - [Firmware](#firmware)
+    - [Technology Stack](#technology-stack)
+    - [Application Layer](#application-layer)
+    - [Communication Ports](#communication-ports)
+    - [Drivers](#drivers)
+  - [Software](#software)
+    - [Technology Stack](#technology-stack-1)
+    - [Application Layer](#application-layer-1)
+    - [Core Module](#core-module)
+  - [Communication](#communication)
+      - [Data Messages](#data-messages)
+      - [Control Messages](#control-messages)
 - [Challenges](#challenges)
-
 - [Resources](#resources)
+- [Product Links](#product-links)
+- [Price List](#price-list)
 
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
 <br>
 <br>
 <br>
@@ -40,6 +50,9 @@
 - Time Difference of Arrival (TDoA)
 
 - Computer Vision
+
+- Task Allocation
+
 
 <br>
 <br>
@@ -57,6 +70,7 @@ This project centers around the concept of creating a cost-effective and adaptab
 
 - Computer Vision Integration: To implement computer vision algorithms for object detection, with a specific focus on identifying and tracking individuals within the operating environment.
 
+
 Expected Outcomes:
 Upon completion of this project, we anticipate achieving the following outcomes:
 
@@ -64,25 +78,66 @@ Upon completion of this project, we anticipate achieving the following outcomes:
 - Insights into the practical applications of UWB technology in GPS-denied environments.
 - A platform for further research and development in the field of indoor logistics and automation.
 
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
+# Components and Key Features
 
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
+**Swarm Drone Fleet**: Develop a fleet of autonomous drones capable of indoor navigation and cargo handling. The drones should be equipped with sensors for obstacle detection and avoidance.
+
+**Machine Learning Algorithms**: Implement machine learning models for real-time decision-making and task allocation. These models should consider factors such as cargo weight, drone battery levels, optimal path planning, and dynamic re-routing in case of obstacles.
+
+---
+
+### -  How to implement Machine Learning Algorithms?
+
+- Defining the Machine Learning Objectives:
+
+    This includes path planning, task allocation, obstacle avoidance, and communication optimization.
+
+- Data Collection and Preprocessing:
+
+    Gathering relevant data for training and testing your machine learning models. This could involve indoor maps, drone sensor data, communication logs, and historical task allocation data.
+    Preprocess the data to make it suitable for training. This may include data cleaning, feature engineering, and data augmentation.
+
+- Model Selection and Development:
+
+    Choose appropriate machine learning algorithms and models for each of the defined tasks. For example:
+    Path Planning: You might use reinforcement learning or deep Q-networks.
+    Task Allocation: This could involve optimization algorithms, reinforcement learning, or deep learning approaches.
+    Communication Optimization: Investigate techniques for adaptive communication and data transmission strategies.
+
+- Integration with Drone System:
+
+    Develop interfaces to integrate your machine learning models with the drone system's control software.
+    Implement real-time data exchange between the drones and the central control system to enable decision-making based on model predictions.
+
+--- 
+
+
+**Non-Ideal Communication Factors**: Investigate and model the communication challenges typically encountered indoors, such as signal interference, limited bandwidth, and signal dropout. Develop strategies to mitigate these challenges and ensure reliable communication among the drones and a central control system.
+
+**Task Allocation**: Create an intelligent task allocation algorithm that optimizes the distribution of cargo delivery tasks among the drones. This algorithm should prioritize factors like minimizing delivery time, energy efficiency, and load balancing among the drones.
+
+---
+
+### How to implement Task Allocation
+
+- Defining the Task Allocation Problem:
+
+     It's about allocating cargo delivery tasks among a swarm of drones while considering factors like minimizing delivery time, energy efficiency, and load balancing.
+
+- Collecting Data:
+
+    Gathering data related to the tasks to be allocated and the capabilities of the drones. This might include the location of delivery points, cargo weights, drone performance data, and battery levels.
+
+- Objective Function:
+
+    Create an objective function that combines the optimization objectives. For example, you can use a weighted sum of delivery time, energy consumption, and load balancing factors.
+
+- Algorithm Selection:
+    - Particle swarm optimization
+    - Reinforcement learning (e.g., using deep - reinforcement learning for task allocation)
+  
+
+- Testing and Simulation
 
 
 # System Design
@@ -186,22 +241,22 @@ This side of the project will be responsible with processing incoming data from 
 ## Communication
 This section is about communication details for drone network and control unit network  
 
-#### Data Channels
+#### Data Messages
 
-- Positional Data Channel (PDC): This channel is dedicated to transmitting real-time positional data from the DJI Tello drones to the central control unit (typically a PC). It carries critical information regarding the drone's location, altitude, orientation, and velocity, all obtained through the integrated UWB positioning system. The PDC ensures that the control unit has up-to-date information for accurate navigation and cargo transport.
+- Positional Data Messages (PDM): This channel is dedicated to transmitting real-time positional data from the DJI Tello drones to the central control unit (typically a PC). It carries critical information regarding the drone's location, altitude, orientation, and velocity, all obtained through the integrated UWB positioning system. The PDC ensures that the control unit has up-to-date information for accurate navigation and cargo transport.
 
-- Camera Image Data Channel (CIDC): The CIDC facilitates the transfer of live camera images from the DJI Tello drones to the control unit. These images are essential for the computer vision module to detect and identify objects, especially individuals, within the operational environment. The high-resolution imagery allows for real-time analysis and decision-making.
+- Camera Image Data Messages (CIDM): The CIDM facilitates the transfer of live camera images from the DJI Tello drones to the control unit. These images are essential for the computer vision module to detect and identify objects, especially individuals, within the operational environment. The high-resolution imagery allows for real-time analysis and decision-making.
 
-- Control Feedback Channel (CFC): In a bidirectional manner, the CFC enables the control unit to send control commands and receive feedback from the drones. This channel plays a crucial role in maintaining constant communication with the drones, allowing for dynamic adjustments to their routes, speeds, and cargo handling, ensuring efficient cargo transport.
+- Control Feedback Messages (CFM): In a bidirectional manner, the CFM enables the control unit to send control commands and receive feedback from the drones. This channel plays a crucial role in maintaining constant communication with the drones, allowing for dynamic adjustments to their routes, speeds, and cargo handling, ensuring efficient cargo transport.
 
 
-#### Control Channels
+#### Control Messages
 
-- Command Control Channel (CCC): The CCC serves as the primary channel for sending control commands from the central control unit to the DJI Tello drones. Commands include take-off, landing, navigation waypoints, cargo pickup and delivery instructions, and emergency stop commands. It ensures precise control over the drones' actions, ensuring they operate seamlessly within the indoor environment.
+- Command Control Messages (CCM): The CCM serves as the primary channel for sending control commands from the central control unit to the DJI Tello drones. Commands include take-off, landing, navigation waypoints, cargo pickup and delivery instructions, and emergency stop commands. It ensures precise control over the drones' actions, ensuring they operate seamlessly within the indoor environment.
 
-- Obstacle Avoidance Control Channel (OACC): To enhance safety during navigation, the OACC provides real-time obstacle detection and avoidance instructions. It allows the control unit to alert the drones of potential obstacles in their path and provides guidance on alternative routes or actions to avoid collisions.
+- Obstacle Avoidance Control Messages (OACM): To enhance safety during navigation, the OACM provides real-time obstacle detection and avoidance instructions. It allows the control unit to alert the drones of potential obstacles in their path and provides guidance on alternative routes or actions to avoid collisions.
 
-- Emergency Control Channel (ECC): In unforeseen circumstances or emergencies, the ECC provides a direct channel for issuing immediate stop and emergency landing commands to the drones. This channel prioritizes safety and allows the control unit to react swiftly to unexpected situations.
+- Emergency Control Messages (ECM): In unforeseen circumstances or emergencies, the ECM provides a direct channel for issuing immediate stop and emergency landing commands to the drones. This channel prioritizes safety and allows the control unit to react swiftly to unexpected situations.
 
 
 
@@ -230,7 +285,19 @@ The primary challenge of this project is to implement a robust and accurate indo
 - [ESP32 DW1000 UWB Indoor Location Positioning System](https://how2electronics.com/esp32-dw1000-uwb-indoor-location-positioning-system/)
 - [Artificial Intelligence with Python Computer Vision](https://www.tutorialspoint.com/artificial_intelligence_with_python/artificial_intelligence_with_python_computer_vision.htm)
 - [Tello Programming](https://tello.oneoffcoder.com/index.html)
+- [DW1000 Datasheet](https://www.qorvo.com/products/p/DWM1001-DEV)
 
 # Product Links
 
 - https://www.e-komponent.com/dwm1001-board-no-batteries
+- https://orangepi.com/index.php?route=product/category&path=238_240
+- https://market.samm.com/raspberry-pi-camera-3
+- https://www.e-komponent.com/dwm1001-board-no-batteries
+- https://www.robotistan.com/esp32-esp-32s-wifi-bluetooth-dual-mode-developement-board
+- https://market.samm.com/raspberry-pi-icin-sim7600e-h-4g-hat-lte-cat-4
+- https://www.robotistan.com/orange-pi-5b-8g64g
+
+
+# Price List
+
+![alt text](price_list.png "Title")
