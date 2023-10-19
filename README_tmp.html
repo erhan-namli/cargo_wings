@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>README.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 style="text-align: center;"> Machine Learning-Enhanced Swarm Drone System for
+Indoor Cargo Task Allocation <p></p>
+</h1><p><img src="file:///Users/erhan/Documents/GitHub/cargo_wings/banner.png" alt="alt text" title="Title"></p>
+<h1 id="table-of-contents">Table of Contents</h1>
+<ul>
+<li><a href="#table-of-contents">Table of Contents</a></li>
+<li><a href="#mentioned-subjects">Mentioned Subjects</a></li>
+<li><a href="#introduction">Introduction</a></li>
+<li><a href="#components-and-key-features">Components and Key Features</a>
+<ul>
+<li><a href="#---how-to-implement-machine-learning-algorithms">-  How to implement Machine Learning Algorithms?</a></li>
+<li><a href="#how-to-implement-task-allocation">How to implement Task Allocation</a></li>
+</ul>
+</li>
+<li><a href="#system-design">System Design</a>
+<ul>
+<li><a href="#hardware-block-diagram">Hardware Block Diagram</a>
+<ul>
+<li><a href="#hardware-components">Hardware Components</a></li>
+</ul>
+</li>
+<li><a href="#firmware">Firmware</a>
+<ul>
+<li><a href="#technology-stack">Technology Stack</a></li>
+<li><a href="#application-layer">Application Layer</a></li>
+<li><a href="#communication-ports">Communication Ports</a></li>
+<li><a href="#drivers">Drivers</a></li>
+</ul>
+</li>
+<li><a href="#software">Software</a>
+<ul>
+<li><a href="#technology-stack-1">Technology Stack</a></li>
+<li><a href="#application-layer-1">Application Layer</a></li>
+<li><a href="#core-module">Core Module</a></li>
+</ul>
+</li>
+<li><a href="#communication">Communication</a>
+<ul>
+<li><a href="#data-messages">Data Messages</a></li>
+<li><a href="#control-messages">Control Messages</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#roadmap">Roadmap</a></li>
+<li><a href="#challenges">Challenges</a></li>
+<li><a href="#resources">Resources</a></li>
+<li><a href="#product-links">Product Links</a></li>
+<li><a href="#price-list">Price List</a></li>
+</ul>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h1 id="mentioned-subjects">Mentioned Subjects</h1>
+<ul>
+<li>
+<p>Indoor Positioning</p>
+</li>
+<li>
+<p>UWB Technology</p>
+</li>
+<li>
+<p>Time Difference of Arrival (TDoA)</p>
+</li>
+<li>
+<p>Computer Vision</p>
+</li>
+<li>
+<p>Task Allocation</p>
+</li>
+</ul>
+<br>
+<br>
+<h1 id="introduction">Introduction</h1>
+<p>The ever-increasing demand for innovative solutions in logistics and transportation has paved the way for the development of novel systems designed to address the challenges posed by indoor cargo transport. This university graduation project explores the integration of DJI Tello drones and Ultra-Wideband (UWB) technology to create an indoor cargo transport system, with a primary focus on achieving precise positioning and efficient navigation within confined spaces.</p>
+<p>Project Scope:
+This project centers around the concept of creating a cost-effective and adaptable indoor cargo transport system that can be employed in various indoor environments, such as warehouses, factories, and research facilities. The project's primary objectives are:</p>
+<ul>
+<li>
+<p>UWB-based Indoor Positioning: To develop a reliable indoor positioning system utilizing UWB technology, which will enable the drones to navigate accurately in GPS-denied environments.</p>
+</li>
+<li>
+<p>Integration with DJI Tello Drones: To interface UWB modules with ESP32 controllers and DJI Tello drones, establishing a communication link that allows real-time data exchange and control over Wi-Fi.</p>
+</li>
+<li>
+<p>Computer Vision Integration: To implement computer vision algorithms for object detection, with a specific focus on identifying and tracking individuals within the operating environment.</p>
+</li>
+</ul>
+<p>Expected Outcomes:
+Upon completion of this project, we anticipate achieving the following outcomes:</p>
+<ul>
+<li>A functioning indoor cargo transport system capable of accurate positioning and obstacle avoidance.</li>
+<li>Insights into the practical applications of UWB technology in GPS-denied environments.</li>
+<li>A platform for further research and development in the field of indoor logistics and automation.</li>
+</ul>
+<h1 id="components-and-key-features">Components and Key Features</h1>
+<p><strong>Swarm Drone Fleet</strong>: Develop a fleet of autonomous drones capable of indoor navigation and cargo handling. The drones should be equipped with sensors for obstacle detection and avoidance.</p>
+<p><strong>Machine Learning Algorithms</strong>: Implement machine learning models for real-time decision-making and task allocation. These models should consider factors such as cargo weight, drone battery levels, optimal path planning, and dynamic re-routing in case of obstacles.</p>
+<hr>
+<h3 id="how-to-implement-machine-learning-algorithms">-  How to implement Machine Learning Algorithms?</h3>
+<ul>
+<li>
+<p>Defining the Machine Learning Objectives:</p>
+<p>This includes path planning, task allocation, obstacle avoidance, and communication optimization.</p>
+</li>
+<li>
+<p>Data Collection and Preprocessing:</p>
+<p>Gathering relevant data for training and testing your machine learning models. This could involve indoor maps, drone sensor data, communication logs, and historical task allocation data.
+Preprocess the data to make it suitable for training. This may include data cleaning, feature engineering, and data augmentation.</p>
+</li>
+<li>
+<p>Model Selection and Development:</p>
+<p>Choose appropriate machine learning algorithms and models for each of the defined tasks. For example:
+Path Planning: You might use reinforcement learning or deep Q-networks.
+Task Allocation: This could involve optimization algorithms, reinforcement learning, or deep learning approaches.
+Communication Optimization: Investigate techniques for adaptive communication and data transmission strategies.</p>
+</li>
+<li>
+<p>Integration with Drone System:</p>
+<p>Develop interfaces to integrate your machine learning models with the drone system's control software.
+Implement real-time data exchange between the drones and the central control system to enable decision-making based on model predictions.</p>
+</li>
+</ul>
+<hr>
+<p><strong>Non-Ideal Communication Factors</strong>: Investigate and model the communication challenges typically encountered indoors, such as signal interference, limited bandwidth, and signal dropout. Develop strategies to mitigate these challenges and ensure reliable communication among the drones and a central control system.</p>
+<p><strong>Task Allocation</strong>: Create an intelligent task allocation algorithm that optimizes the distribution of cargo delivery tasks among the drones. This algorithm should prioritize factors like minimizing delivery time, energy efficiency, and load balancing among the drones.</p>
+<hr>
+<h3 id="how-to-implement-task-allocation">How to implement Task Allocation</h3>
+<ul>
+<li>
+<p>Defining the Task Allocation Problem:</p>
+<p>It's about allocating cargo delivery tasks among a swarm of drones while considering factors like minimizing delivery time, energy efficiency, and load balancing.</p>
+</li>
+<li>
+<p>Collecting Data:</p>
+<p>Gathering data related to the tasks to be allocated and the capabilities of the drones. This might include the location of delivery points, cargo weights, drone performance data, and battery levels.</p>
+</li>
+<li>
+<p>Objective Function:</p>
+<p>Create an objective function that combines the optimization objectives. For example, you can use a weighted sum of delivery time, energy consumption, and load balancing factors.</p>
+</li>
+<li>
+<p>Algorithm Selection:</p>
+<ul>
+<li>Particle swarm optimization</li>
+<li>Reinforcement learning (e.g., using deep - reinforcement learning for task allocation)</li>
+</ul>
+</li>
+<li>
+<p>Testing and Simulation</p>
+</li>
+</ul>
+<h1 id="system-design">System Design</h1>
+<br>
+<p><img src="file:///Users/erhan/Documents/GitHub/cargo_wings/system_design.png" alt="alt text" title="Title"></p>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h2 id="hardware-block-diagram">Hardware Block Diagram</h2>
+<p><img src="file:///Users/erhan/Documents/GitHub/cargo_wings/hardware_block_diagram.png" alt="alt text" title="Title"></p>
+<h3 id="hardware-components">Hardware Components</h3>
+<ul>
+<li>
+<p><a href="https://datasheet.lcsc.com/lcsc/1810010514_DecaWave-DW1000-ITR7_C95490.pdf">DW1000 UWB (for Indoor Positioning)</a></p>
+</li>
+<li>
+<p><a href="https://www.pololu.com/file/0J1187/VL53L0X.pdf">VL53L0X Time-of-Flight Distance Sensor(for target distance mesauring)</a></p>
+</li>
+<li>
+<p><a href="https://www.espressif.com/sites/default/files/documentation/esp32-s3_datasheet_en.pdf">ESP32S3 (Controller)</a></p>
+</li>
+</ul>
+<hr>
+<h2 id="firmware">Firmware</h2>
+<p>The firmware side responsible with communicating drones each other via WiFi and UWB Module, also sending the data of the distance sensors on the drones in the network to the control unit</p>
+<h3 id="technology-stack">Technology Stack</h3>
+<ul>
+<li>ESP-IDF</li>
+<li>Arduino</li>
+</ul>
+<h3 id="application-layer">Application Layer</h3>
+<p>Baremetal firmware programming</p>
+<h3 id="communication-ports">Communication Ports</h3>
+<ul>
+<li>I2C</li>
+<li>UART</li>
+<li>SPI</li>
+<li>WiFi</li>
+</ul>
+<h3 id="drivers">Drivers</h3>
+<ul>
+<li>DW100 UWB Module Driver</li>
+<li>VL53L0X Distamce Sensor Driver</li>
+</ul>
+<h2 id="software">Software</h2>
+<p>This side of the project will be responsible with processing incoming data from drones and sending control commands releted with processed data such as finding target person and target room with computer vision and indoor location positioning algorithms.</p>
+<p><img src="file:///Users/erhan/Documents/GitHub/cargo_wings/ui_design.png" alt="alt text" title="Title"></p>
+<h3 id="technology-stack">Technology Stack</h3>
+<ul>
+<li>QT5 (Desktop App)</li>
+<li>Websocket (Communicating with Tello Drone)</li>
+<li>React (User interface library for Web App)</li>
+<li>Flask (Backend framework for core module communication)</li>
+<li>OpenCV (Image Processing)</li>
+<li>Tensorflow (Image Classification)</li>
+</ul>
+<h3 id="application-layer">Application Layer</h3>
+<p><em>Features</em></p>
+<ul>
+<li>Computer Vision System that classifies teachers</li>
+<li>An User Interface that interacts with Drone for manual control</li>
+<li>Cargo System (Starting Point, Target and Cargo)</li>
+</ul>
+<h3 id="core-module">Core Module</h3>
+<p><em>Features</em></p>
+<ul>
+<li>
+<p>Image Processing</p>
+</li>
+<li>
+<p>Classifying detected person</p>
+</li>
+<li>
+<p>Indoor Location Calculations with UWB Module</p>
+</li>
+</ul>
+<p><img src="file:///Users/erhan/Documents/GitHub/cargo_wings/locationing.png" alt="alt text" title="Title"></p>
+<h2 id="communication">Communication</h2>
+<p>This section is about communication details for drone network and control unit network</p>
+<h4 id="data-messages">Data Messages</h4>
+<ul>
+<li>
+<p>Positional Data Messages (PDM): This channel is dedicated to transmitting real-time positional data from the DJI Tello drones to the central control unit (typically a PC). It carries critical information regarding the drone's location, altitude, orientation, and velocity, all obtained through the integrated UWB positioning system. The PDC ensures that the control unit has up-to-date information for accurate navigation and cargo transport.</p>
+</li>
+<li>
+<p>Camera Image Data Messages (CIDM): The CIDM facilitates the transfer of live camera images from the DJI Tello drones to the control unit. These images are essential for the computer vision module to detect and identify objects, especially individuals, within the operational environment. The high-resolution imagery allows for real-time analysis and decision-making.</p>
+</li>
+<li>
+<p>Control Feedback Messages (CFM): In a bidirectional manner, the CFM enables the control unit to send control commands and receive feedback from the drones. This channel plays a crucial role in maintaining constant communication with the drones, allowing for dynamic adjustments to their routes, speeds, and cargo handling, ensuring efficient cargo transport.</p>
+</li>
+</ul>
+<h4 id="control-messages">Control Messages</h4>
+<ul>
+<li>
+<p>Command Control Messages (CCM): The CCM serves as the primary channel for sending control commands from the central control unit to the DJI Tello drones. Commands include take-off, landing, navigation waypoints, cargo pickup and delivery instructions, and emergency stop commands. It ensures precise control over the drones' actions, ensuring they operate seamlessly within the indoor environment.</p>
+</li>
+<li>
+<p>Obstacle Avoidance Control Messages (OACM): To enhance safety during navigation, the OACM provides real-time obstacle detection and avoidance instructions. It allows the control unit to alert the drones of potential obstacles in their path and provides guidance on alternative routes or actions to avoid collisions.</p>
+</li>
+<li>
+<p>Emergency Control Messages (ECM): In unforeseen circumstances or emergencies, the ECM provides a direct channel for issuing immediate stop and emergency landing commands to the drones. This channel prioritizes safety and allows the control unit to react swiftly to unexpected situations.</p>
+</li>
+</ul>
+<h1 id="roadmap">Roadmap</h1>
+<p><img src="file:///Users/erhan/Documents/GitHub/cargo_wings/roadmap.png" alt="alt text" title="Title"></p>
+<h1 id="challenges">Challenges</h1>
+<p>The primary challenge of this project is to implement a robust and accurate indoor positioning system using Ultra-Wideband (UWB) technology to guide DJI Tello drones within confined indoor spaces. Specifically, this involves:</p>
+<ul>
+<li>
+<p>UWB Module Integration: Integrating UWB modules with DJI Tello drones to enable precise location tracking and navigation capabilities. These modules will provide sub-centimeter accuracy in determining the drones' positions within the indoor environment.</p>
+</li>
+<li>
+<p>Positional Data Transmission: Establishing a reliable data channel for the real-time transmission of positional data from the UWB-equipped drones to the central control unit. This data will include information such as the drone's XYZ coordinates, orientation, and velocity, allowing for continuous monitoring and control.</p>
+</li>
+<li>
+<p>Obstacle Avoidance: Implementing algorithms and control mechanisms to leverage UWB data for obstacle avoidance. This involves detecting obstacles in the drones' flight path and adjusting their trajectories to avoid collisions while maintaining cargo transport efficiency.</p>
+</li>
+<li>
+<p>Adaptation to Dynamic Environments: Addressing the challenges posed by dynamic indoor environments where obstacles may move or change position. The system must be capable of real-time adjustments to account for such changes and ensure safe and efficient navigation.</p>
+</li>
+<li>
+<p>Validation and Calibration: Ensuring the accuracy and reliability of the UWB positioning system through calibration and testing in different indoor scenarios. This involves fine-tuning the UWB modules and validating their performance under various conditions.</p>
+</li>
+</ul>
+<h1 id="resources">Resources</h1>
+<ul>
+<li><a href="https://iosoft.blog/2019/11/22/real-time-location-ultra-wideband/">Real Time Location Ultra Wideband</a></li>
+<li><a href="https://medium.com/@newforestberlin/precise-realtime-indoor-localization-with-raspberry-pi-and-ultra-wideband-technology-decawave-191e4e2daa8c">UWV with Rasperry Pi</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Ultra-wideband">Ultra-Wideband</a></li>
+<li><a href="https://www.mdpi.com/1424-8220/16/5/707">Ultra Wideband Indoor Positioning Technologies: Analysis and Recent Advances</a></li>
+<li><a href="https://www.inpixon.com/technology/standards/time-difference-of-arrival">Time Difference of Arrival</a></li>
+<li><a href="https://www.instructables.com/ESP32-UWB-Indoor-Positioning-Test/">ESP32 UWB Indoor Positioning Test</a></li>
+<li><a href="https://how2electronics.com/esp32-dw1000-uwb-indoor-location-positioning-system/">ESP32 DW1000 UWB Indoor Location Positioning System</a></li>
+<li><a href="https://www.tutorialspoint.com/artificial_intelligence_with_python/artificial_intelligence_with_python_computer_vision.htm">Artificial Intelligence with Python Computer Vision</a></li>
+<li><a href="https://tello.oneoffcoder.com/index.html">Tello Programming</a></li>
+<li><a href="https://www.qorvo.com/products/p/DWM1001-DEV">DW1000 Datasheet</a></li>
+</ul>
+<h1 id="product-links">Product Links</h1>
+<ul>
+<li>https://www.e-komponent.com/dwm1001-board-no-batteries</li>
+<li>https://orangepi.com/index.php?route=product/category&amp;path=238_240</li>
+<li>https://market.samm.com/raspberry-pi-camera-3</li>
+<li>https://www.e-komponent.com/dwm1001-board-no-batteries</li>
+<li>https://www.robotistan.com/esp32-esp-32s-wifi-bluetooth-dual-mode-developement-board</li>
+<li>https://market.samm.com/raspberry-pi-icin-sim7600e-h-4g-hat-lte-cat-4</li>
+<li>https://www.robotistan.com/orange-pi-5b-8g64g</li>
+</ul>
+<br>
+<br>
+<br>
+<h1 id="price-list">Price List</h1>
+<p><img src="file:///Users/erhan/Documents/GitHub/cargo_wings/price_list.png" alt="alt text" title="Title"></p>
+
+</body>
+</html>

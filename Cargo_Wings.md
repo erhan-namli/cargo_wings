@@ -1,5 +1,6 @@
 
-<h1 style="text-align: center;"> Indoor Cargo System </p>
+<h1 style="text-align: center;"> Machine Learning-Enhanced Swarm Drone System for
+Indoor Cargo Task Allocation </p>
 
 ![alt text](banner.png "Title")
 
@@ -26,6 +27,7 @@
   - [Communication](#communication)
       - [Data Messages](#data-messages)
       - [Control Messages](#control-messages)
+- [Roadmap](#roadmap)
 - [Challenges](#challenges)
 - [Resources](#resources)
 - [Product Links](#product-links)
@@ -154,13 +156,6 @@ Upon completion of this project, we anticipate achieving the following outcomes:
 <br>
 <br>
 <br>
-<br>
-<br>
-<br>
-
-<br>
-<br>
-<br>
 
 ## Hardware Block Diagram
 
@@ -257,7 +252,26 @@ This section is about communication details for drone network and control unit n
 - Obstacle Avoidance Control Messages (OACM): To enhance safety during navigation, the OACM provides real-time obstacle detection and avoidance instructions. It allows the control unit to alert the drones of potential obstacles in their path and provides guidance on alternative routes or actions to avoid collisions.
 
 - Emergency Control Messages (ECM): In unforeseen circumstances or emergencies, the ECM provides a direct channel for issuing immediate stop and emergency landing commands to the drones. This channel prioritizes safety and allows the control unit to react swiftly to unexpected situations.
+  
 
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+
+# Roadmap
+
+![alt text](roadmap.png "Title")
 
 
 # Challenges
@@ -297,6 +311,9 @@ The primary challenge of this project is to implement a robust and accurate indo
 - https://market.samm.com/raspberry-pi-icin-sim7600e-h-4g-hat-lte-cat-4
 - https://www.robotistan.com/orange-pi-5b-8g64g
 
+<br>
+<br>
+<br>
 
 # Price List
 
