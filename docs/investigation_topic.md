@@ -42,6 +42,8 @@
 
 **Non-Ideal Communication Factors**: Investigate and model the communication challenges typically encountered indoors, such as signal interference, limited bandwidth, and signal dropout. Develop strategies to mitigate these challenges and ensure reliable communication among the drones and a central control system.
 
+**Bit error rate
+
 **Task Allocation**: Create an intelligent task allocation algorithm that optimizes the distribution of cargo delivery tasks among the drones. This algorithm should prioritize factors like minimizing delivery time, energy efficiency, and load balancing among the drones.
 
 ---
@@ -60,7 +62,7 @@
 
     Create an objective function that combines the optimization objectives. For example, you can use a weighted sum of delivery time, energy consumption, and load balancing factors.
 
-- Algorithm Selection:
+- Distributed Algorithm Selection:
     - Greedy algorithms
     - Genetic algorithms
     - Particle swarm optimization

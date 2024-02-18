@@ -9,7 +9,6 @@ import sys
 
 from main_window import Ui_MainWindow
 
-
 class CargoWingsApp(QMainWindow, QWidget):
 
     def __init__(self, parent=None):

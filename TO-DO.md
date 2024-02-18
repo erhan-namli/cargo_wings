@@ -41,3 +41,6 @@
     - Get GSM Module Antenna
     - Get Raspberry Pi 3.5 Inch Case(Optional)
     - 
+
+
+- export DISPLAY=:0.0
