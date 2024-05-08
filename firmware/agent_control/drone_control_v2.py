@@ -9,6 +9,8 @@ import socket
 import datetime
 from lightdjitellopy import Tello
 
+
+
 class State:
     WAITING_FOR_MESSAGE = 0
     NEGOTIATING_MISSION = 1
@@ -64,6 +66,11 @@ def wait_message():
             msg_json = json.loads(msg_str)
             if "command" in msg_json and msg_json["command"] == "start":
                 return State.WAITING_FOR_MISSION_START, mission_matrix
+
+            # Check if the message contains a "command" key and its value is "qrcodechecked"
+            if "command" in msg_json and msg_json["command"] == "qrcodechecked":
+                return State.QR_CODE_CHECK, mission_matrix
+
         except json.JSONDecodeError as e:
             print("Error decoding JSON message:", e)
 
@@ -193,7 +200,7 @@ def main():
         if mission_matrix:
                 state = State.NEGOTIATING_MISSION
 
-        elif state == State.NEGOTIATING_MISSION:
+        if state == State.NEGOTIATING_MISSION:
             
             negotiate_mission(drone_ip_address, mission_matrix)
             state = State.WAITING_FOR_MISSION_START
@@ -268,7 +275,27 @@ def main():
             current_x = least_cost_mission[0]
             current_y = least_cost_mission[1]
 
-            tello.land()
+            #tello.land()
+
+        
+        if state == State.MISSION_COMPLETED:
+            # Inform mission completion
+            send_json_packet("192.168.1.255", {"message_type": "mission_completed",
+                                               "tello_name": "TELLO-B5997E"})
+
+            # Move to QR Code check state
+            state = State.QR_CODE_CHECK
+
+        if state == State.QR_CODE_CHECK:
+            # Send message to 192.168.1.255 with its own IP
+            send_json_packet("192.168.1.255", {"message_type": "qr_code_check",
+                                               "ip_address": own_ip})
+
+
+            print("Sent QR Code check message with IP:", own_ip)
+
+            # Set state to AFTER_MISSION_IN_PROGRESS to exit the loop
+            state = State.AFTER_MISSION_IN_PROGRESS
 
 print("Mission in progress...")
 

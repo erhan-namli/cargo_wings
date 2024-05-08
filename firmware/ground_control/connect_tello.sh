@@ -9,5 +9,6 @@ sudo iwconfig wlan0 mode managed
 
 # Connect to the "TELLO-B5997E" SSID
 sudo iwconfig wlan0 essid "TELLO-B5997E"
+sudo dhclient wlan0
 
 echo "Connected to TELLO-B5997E SSID."

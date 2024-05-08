@@ -12,6 +12,15 @@ import socket
 from djitellopy import Tello
 import cv2
 from pyzbar.pyzbar import decode
+import threading
+import socket
+
+TELLO_SCRIPT_MAPPING = {
+    1: "connect_tello1.sh",
+    2: "connect_tello2.sh",
+    3: "connect_tello3.sh"
+}
+
 
 def run_shell_script(script_name):
     try:
@@ -37,6 +46,37 @@ def send_json_packet(ip_address, json_data):
     finally:
         sock.close()
 
+
+def listen_for_drone_messages(callback):
+    UDP_IP = '192.168.1.255'
+    UDP_PORT = 5050
+    sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    sock.bind((UDP_IP, UDP_PORT))
+
+    mission_matrix = None  # Initialize mission_matrix here
+
+    print("Thread started")
+
+    while True:
+        msg, addr = sock.recvfrom(1024)
+        now = datetime.datetime.now()
+        msg_str = msg.decode()  # Decode the bytes-like object into a string
+        print('Time:', now, 'RECV', msg_str)
+        rcvd_msg = f'Time: {now} RECV {msg_str}'
+
+        # Parse incoming message and update mission matrix
+        mission_matrix = parse_incoming_message(msg_str)
+
+        # Check if the message contains a "command" key and its value is "start"
+        try:
+            msg_json = json.loads(msg_str)
+            if "command" in msg_json and msg_json["message_type"] == "qr_code_check":
+                callback(data)
+
+        except json.JSONDecodeError as e:
+            print("Error decoding JSON message:", e)
+
+
 class MainWindow(QMainWindow):
     def __init__(self):
         super().__init__()
@@ -58,6 +98,27 @@ class MainWindow(QMainWindow):
 
         self.ui.btn_start_mission.clicked.connect(self.start_mission)
 
+        threading.Thread(target=listen_for_drone_messages, args=(self.handle_drone_message,), daemon=True).start()
+
+    def handle_drone_message(self, message):
+        # Handle received message from drone
+        print("Mission completed by drone at tello name:", message["tello_name"])
+        # Perform QR code check
+
+        ## Connect to tello
+
+        if(message["tello_name"] == "TELLO-B5997E"):
+
+            connect_tello_ap(1)
+
+        elif(message["tello_name"] == "TELLO-5CF682"):
+
+            connect_tello_ap(2)
+
+        ## Take picture and scan_qr_code
+
+        self.take_picture_and_scan_qr_code()
+
     def start_mission(self):
 
         ip_address = "192.168.1.255"
@@ -65,6 +126,8 @@ class MainWindow(QMainWindow):
                                       "mission_matrix": self.mission_matrix,
                                       "command": "start",
                                       "traffic": "broadcast"})
+
+                                      
     def adhoc_mission(self):
 
         self.mission_matrix = [[int(self.ui.btn_qr1.isChecked()),
@@ -82,8 +145,10 @@ class MainWindow(QMainWindow):
                                ]
 
         ip_address = "192.168.1.255"
+
         send_json_packet(ip_address, {"mission_matrix": self.mission_matrix,
                                       "command": "wait"})
+
 
 
     def send_json_packet(ip_address, json_data):
@@ -151,9 +216,19 @@ class MainWindow(QMainWindow):
         tello.streamoff()
         vidcap.release()
 
-    def connect_tello_ap(self):
+    def connect_tello_ap(self, tello_number):
 
-        run_shell_script("connect_tello.sh")
+        if(tello_number==1):
+
+            run_shell_script("connect_tello.sh")
+
+        elif(tello_number==2):
+
+            run_shell_script("connect_tello2.sh")
+
+        elif(tello_number==3):
+
+            run_shell_script("connect_tello3.sh")
 
     def connect_homenetwork(self):
 
