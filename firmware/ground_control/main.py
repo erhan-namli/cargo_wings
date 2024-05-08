@@ -14,6 +14,7 @@ import cv2
 from pyzbar.pyzbar import decode
 import threading
 import socket
+import datetime
 
 TELLO_SCRIPT_MAPPING = {
     1: "connect_tello1.sh",
@@ -48,9 +49,10 @@ def send_json_packet(ip_address, json_data):
 
 
 def listen_for_drone_messages(callback):
-    UDP_IP = '192.168.1.255'
-    UDP_PORT = 5050
+    UDP_IP = '0.0.0.0'
+    UDP_PORT = 5005
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    #sock.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
     sock.bind((UDP_IP, UDP_PORT))
 
     mission_matrix = None  # Initialize mission_matrix here
@@ -63,9 +65,6 @@ def listen_for_drone_messages(callback):
         msg_str = msg.decode()  # Decode the bytes-like object into a string
         print('Time:', now, 'RECV', msg_str)
         rcvd_msg = f'Time: {now} RECV {msg_str}'
-
-        # Parse incoming message and update mission matrix
-        mission_matrix = parse_incoming_message(msg_str)
 
         # Check if the message contains a "command" key and its value is "start"
         try:
@@ -147,6 +146,7 @@ class MainWindow(QMainWindow):
         ip_address = "192.168.1.255"
 
         send_json_packet(ip_address, {"mission_matrix": self.mission_matrix,
+                                      "message_type" :"info",
                                       "command": "wait"})
 
 
