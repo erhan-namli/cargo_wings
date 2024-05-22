@@ -52,7 +52,7 @@ def listen_for_drone_messages(callback):
     UDP_IP = '0.0.0.0'
     UDP_PORT = 5005
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-    #sock.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
+    sock.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
     sock.bind((UDP_IP, UDP_PORT))
 
     mission_matrix = None  # Initialize mission_matrix here
@@ -69,8 +69,11 @@ def listen_for_drone_messages(callback):
         # Check if the message contains a "command" key and its value is "start"
         try:
             msg_json = json.loads(msg_str)
-            if "command" in msg_json and msg_json["message_type"] == "qr_code_check":
-                callback(data)
+
+            print(msg_json["message_type"])
+
+            if msg_json["message_type"] == "drone_mission_information":
+                callback(msg_json)
 
         except json.JSONDecodeError as e:
             print("Error decoding JSON message:", e)
@@ -97,26 +100,96 @@ class MainWindow(QMainWindow):
 
         self.ui.btn_start_mission.clicked.connect(self.start_mission)
 
+        self.ui.btn_scan_drones.clicked.connect(self.start_scanning_drones)
+
         threading.Thread(target=listen_for_drone_messages, args=(self.handle_drone_message,), daemon=True).start()
+
+    def start_scanning_drones(self):
+
+        try:
+            # Interface name might be different, common ones are 'wlan0' or 'eth0', check your system
+            interface_name = 'wlan0'
+            
+            # Run the `iwlist` command to scan for networks
+            result = subprocess.run(
+                ['sudo', 'iwlist', interface_name, 'scan'],
+                stdout=subprocess.PIPE,
+                stderr=subprocess.PIPE,
+                text=True
+            )
+
+            if result.returncode == 0:
+                # Parse the output to find SSIDs
+                lines = result.stdout.split('\n')
+                tello_ssids = []
+                for line in lines:
+                    if "ESSID:" in line:
+                        ssid = line.split('"')[1]  # Extract SSID name
+                        if ssid.startswith('TELLO'):
+                            tello_ssids.append(ssid)
+                
+                if tello_ssids:
+                    self.ui.drone_list_widget.addItems(tello_ssids)
+                    print("Found TELLO networks:")
+                    for ssid in tello_ssids:
+                        print(ssid)
+                    # Optionally update a list widget or another UI element
+                else:
+                    print("No TELLO networks found.")
+            else:
+                print("Error scanning for Wi-Fi networks:", result.stderr)
+
+        except Exception as e:
+            print("An error occurred while scanning Wi-Fi networks:", e)
 
     def handle_drone_message(self, message):
         # Handle received message from drone
-        print("Mission completed by drone at tello name:", message["tello_name"])
+        print("buraya geldi...")
+        #print("Mission completed by drone at tello name:", message["tello_name"])
         # Perform QR code check
 
         ## Connect to tello
 
-        if(message["tello_name"] == "TELLO-B5997E"):
+        print("debug_erhan " , message['least_cost_mission'])
 
-            connect_tello_ap(1)
+        mission_location = message['least_cost_mission']
 
-        elif(message["tello_name"] == "TELLO-5CF682"):
+        if(mission_location == [0, 0]):
+            self.ui.rb_00.setChecked(True)
+        if(mission_location == [0, 1]):
+            self.ui.rb_01.setChecked(True)
+        if(mission_location == [0, 2]):
+            self.ui.rb_02.setChecked(True)
+        if(mission_location == [1, 0]):
+            self.ui.rb_10.setChecked(True)
+        if(mission_location == [1, 1]):
+            self.ui.rb_11.setChecked(True)
+        if(mission_location == [1, 2]):
+            self.ui.rb_12.setChecked(True)
+        if(mission_location == [2, 0]):
+            self.ui.rb_20.setChecked(True)
+        if(mission_location == [2, 1]):
+            self.ui.rb_21.setChecked(True)
+        if(mission_location == [2, 2]):
+            self.ui.rb_22.setChecked(True)
+        if(mission_location == [3, 0]):
+            self.ui.rb_30.setChecked(True)
+        if(mission_location == [3, 1]):
+            self.ui.rb_31.setChecked(True)
+        if(mission_location == [3, 2]):
+            self.ui.rb_32.setChecked(True)
 
-            connect_tello_ap(2)
+        #if(message["tello_name"] == "TELLO-B5997E"):
+
+            #connect_tello_ap(1)
+
+        #elif(message["tello_name"] == "TELLO-5CF682"):
+
+            #connect_tello_ap(2)
 
         ## Take picture and scan_qr_code
 
-        self.take_picture_and_scan_qr_code()
+        #self.take_picture_and_scan_qr_code()
 
     def start_mission(self):
 

@@ -9,8 +9,6 @@ import socket
 import datetime
 from lightdjitellopy import Tello
 
-
-
 class State:
     WAITING_FOR_MESSAGE = 0
     NEGOTIATING_MISSION = 1

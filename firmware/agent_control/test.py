@@ -147,10 +147,11 @@ def negotiate_mission(ip_address, mission_matrix):
     }
     # Send negotiation data to other drones
     send_json_packet("192.168.1.255", negotiation_data)  # Broadcasting to all drones in the network
+
     print("Negotiation data sent for mission matrix.")
 
 
-def move_tello(tello, direction, distance, degree):
+def move_tello(tello, direction, distance, degree=None):
 
     if distance == 0:
         return  # Skip movement commands if distance is zero
@@ -242,7 +243,7 @@ def main():
                                                 "traffic": "broadcast"})
 
 
-            # state = State.MISSION_IN_PROGRESS -> TESTING PURPOSE
+            state = State.MISSION_IN_PROGRESS
 
         if state == State.MISSION_IN_PROGRESS:
 
@@ -277,7 +278,13 @@ def main():
 
             #tello.land()
 
+            state = State.MISSION_COMPLETED
+
         if state == State.MISSION_COMPLETED:
+
+
+            run_shell_script("start_adhoc.sh")
+
             # Inform mission completion
             send_json_packet("192.168.1.255", {"message_type": "mission_completed",
                                                "tello_name": "TELLO-B5997E"})
@@ -287,7 +294,7 @@ def main():
 
         if state == State.QR_CODE_CHECK:
             
-            tello.move_down(15) ## for checking the qr code
+            #tello.move_down(15) ## for checking the qr code
 
             send_json_packet("192.168.1.255", {"message_type": "qr_code_check",
                                                "tello_name": "TELLO-B5997E"})

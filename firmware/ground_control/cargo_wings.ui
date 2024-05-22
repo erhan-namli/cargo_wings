@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>480</width>
-    <height>322</height>
+    <width>484</width>
+    <height>331</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -259,7 +259,7 @@ QStatusBar {
        </item>
       </layout>
      </widget>
-     <widget class="QPushButton" name="pushButton_3">
+     <widget class="QPushButton" name="btn_scan_drones">
       <property name="geometry">
        <rect>
         <x>50</x>
@@ -272,7 +272,7 @@ QStatusBar {
        <string>Scan Drones</string>
       </property>
      </widget>
-     <widget class="QListWidget" name="listWidget">
+     <widget class="QListWidget" name="drone_list_widget">
       <property name="geometry">
        <rect>
         <x>30</x>
@@ -281,11 +281,6 @@ QStatusBar {
         <height>181</height>
        </rect>
       </property>
-      <item>
-       <property name="text">
-        <string>TELLO-B65788</string>
-       </property>
-      </item>
      </widget>
     </widget>
     <widget class="QWidget" name="tab_2">
@@ -295,7 +290,7 @@ QStatusBar {
      <widget class="QPushButton" name="btn_start_mission">
       <property name="geometry">
        <rect>
-        <x>370</x>
+        <x>340</x>
         <y>210</y>
         <width>101</width>
         <height>31</height>
@@ -338,7 +333,7 @@ QStatusBar {
           </widget>
          </item>
          <item>
-          <widget class="QRadioButton" name="radioButton">
+          <widget class="QRadioButton" name="rb_00">
            <property name="enabled">
             <bool>false</bool>
            </property>
@@ -359,7 +354,7 @@ QStatusBar {
           </widget>
          </item>
          <item>
-          <widget class="QRadioButton" name="radioButton_3">
+          <widget class="QRadioButton" name="rb_01">
            <property name="enabled">
             <bool>false</bool>
            </property>
@@ -380,7 +375,7 @@ QStatusBar {
           </widget>
          </item>
          <item>
-          <widget class="QRadioButton" name="radioButton_4">
+          <widget class="QRadioButton" name="rb_02">
            <property name="enabled">
             <bool>false</bool>
            </property>
@@ -401,7 +396,7 @@ QStatusBar {
           </widget>
          </item>
          <item>
-          <widget class="QRadioButton" name="radioButton_2">
+          <widget class="QRadioButton" name="rb_10">
            <property name="enabled">
             <bool>false</bool>
            </property>
@@ -422,7 +417,7 @@ QStatusBar {
           </widget>
          </item>
          <item>
-          <widget class="QRadioButton" name="radioButton_5">
+          <widget class="QRadioButton" name="rb_11">
            <property name="enabled">
             <bool>false</bool>
            </property>
@@ -443,7 +438,7 @@ QStatusBar {
           </widget>
          </item>
          <item>
-          <widget class="QRadioButton" name="radioButton_6">
+          <widget class="QRadioButton" name="rb_12">
            <property name="enabled">
             <bool>false</bool>
            </property>
@@ -460,13 +455,13 @@ QStatusBar {
       <property name="geometry">
        <rect>
         <x>20</x>
-        <y>200</y>
-        <width>61</width>
+        <y>210</y>
+        <width>101</width>
         <height>31</height>
        </rect>
       </property>
       <property name="text">
-       <string>AdHoc</string>
+       <string>Send Missions</string>
       </property>
      </widget>
      <widget class="QWidget" name="gridLayoutWidget_2">
@@ -489,7 +484,7 @@ QStatusBar {
           </widget>
          </item>
          <item>
-          <widget class="QRadioButton" name="radioButton_7">
+          <widget class="QRadioButton" name="rb_20">
            <property name="enabled">
             <bool>false</bool>
            </property>
@@ -510,7 +505,7 @@ QStatusBar {
           </widget>
          </item>
          <item>
-          <widget class="QRadioButton" name="radioButton_8">
+          <widget class="QRadioButton" name="rb_21">
            <property name="enabled">
             <bool>false</bool>
            </property>
@@ -531,7 +526,7 @@ QStatusBar {
           </widget>
          </item>
          <item>
-          <widget class="QRadioButton" name="radioButton_9">
+          <widget class="QRadioButton" name="rb_22">
            <property name="enabled">
             <bool>false</bool>
            </property>
@@ -552,7 +547,7 @@ QStatusBar {
           </widget>
          </item>
          <item>
-          <widget class="QRadioButton" name="radioButton_10">
+          <widget class="QRadioButton" name="rb_30">
            <property name="enabled">
             <bool>false</bool>
            </property>
@@ -573,7 +568,7 @@ QStatusBar {
           </widget>
          </item>
          <item>
-          <widget class="QRadioButton" name="radioButton_11">
+          <widget class="QRadioButton" name="rb_31">
            <property name="enabled">
             <bool>false</bool>
            </property>
@@ -594,7 +589,7 @@ QStatusBar {
           </widget>
          </item>
          <item>
-          <widget class="QRadioButton" name="radioButton_12">
+          <widget class="QRadioButton" name="rb_32">
            <property name="enabled">
             <bool>false</bool>
            </property>

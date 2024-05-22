@@ -8,7 +8,7 @@ sleep 1
 sudo iwconfig wlan0 mode managed
 
 # Connect to the "TELLO-B5997E" SSID
-sudo iwconfig wlan0 essid "TELLO-5CF682"
+sudo iwconfig wlan0 essid "TELLO-FE1FB2"
 sudo dhclient wlan0
 
-echo "Connected to TELLO-5CF682 SSID."
+echo "Connected to TELLO-FE1FB2 SSID."
